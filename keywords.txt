@@ -1,0 +1,34 @@
+# Syntax
+
+
+# Datatypes
+
+Pepito		KEYWORD1
+
+# Methods and Functions
+
+ledOn		KEYWORD2
+ledOff 		KEYWORD2
+setPower 	KEYWORD2
+blink		KEYWORD2
+speakerOn	KEYWORD2
+speakerOff	KEYWORD2
+beep		KEYWORD2
+leftTracker	KEYWORD2
+rightTracker	KEYWORD2
+maxPower	KEYWORD2
+minPower	KEYWORD2
+distance	KEYWORD2
+setLeftMotor	KEYWORD2
+setRightMotor	KEYWORD2
+stop		KEYWORD2
+move		KEYWORD2
+screen		KEYWORD2
+
+# Constants
+
+FORWARD		LITERAL1
+REVERSE		LITERAL1
+LEFT		LITERAL1
+RIGHT		LITERAL1
+I2C_ADDRESS 	LITERAL1
