@@ -7,6 +7,16 @@
 Pepito::Pepito(float power)
 {
 
+  // default/initial pin assignments
+  led 		= 15; //A1
+  speaker 	= 3;
+  lTracker 	= 16; //A2
+  rTracker	= 17; //A3
+  lMotorA	= 5;
+  lMotorB	= 9;
+  rMotorA	= 6;
+  rMotorB	= 10; 
+
   // default geared motor rating
   maxMotorPower = 6; // volts
   minMotorPower = 3; // volts
@@ -14,26 +24,8 @@ Pepito::Pepito(float power)
   // power refers to the power supplied to the 
   // robot in volts
   _totalPower = power;	
-  setPower(_totalPower); // set max/min power for safety
 
-
-  // set default values/setting
-  led 		= 15; //A1
-  speaker 	= 3;
-  lTracker 	= 16;
-  rTracker	= 17;
-  lMotorA	= 5;
-  lMotorB	= 9;
-  rMotorA	= 6;
-  rMotorB	= 10; 
-  pinMode(led, OUTPUT);
-  pinMode(speaker, OUTPUT);
-  pinMode(lTracker, INPUT);
-  pinMode(rTracker, INPUT);
-  pinMode(lMotorA, OUTPUT);
-  pinMode(lMotorB, OUTPUT);
-  pinMode(rMotorA, OUTPUT);
-  pinMode(rMotorB, OUTPUT);
+  setDefaults();
 
   stop();
 
@@ -67,16 +59,52 @@ Pepito::~Pepito()
 	// nothing to destruct
 }
 
-void Pepito::setPower(float power) {
+void Pepito::setDefaults() {
+  
 
- if (power>maxMotorPower) {
-  _maxPower =   (float(maxMotorPower)/float(power))*100.0;
- } else {
-  _maxPower = 100;
- }
+  // set secondary default values/setting
 
-  _minPower =  (float(minMotorPower)/float(power))*100.0;
-  if (_minPower<100) ++_minPower;
+  pinMode(led, OUTPUT);
+  pinMode(speaker, OUTPUT);
+  pinMode(lTracker, INPUT);
+  pinMode(rTracker, INPUT);
+  pinMode(lMotorA, OUTPUT);
+  pinMode(lMotorB, OUTPUT);
+  pinMode(rMotorA, OUTPUT);
+  pinMode(rMotorB, OUTPUT);
+
+  // set power limits
+  if (_totalPower>maxMotorPower) {
+   _maxPower =   (float(maxMotorPower)/float(_totalPower))*100.0;
+  } else {
+   _maxPower = 100;
+  }
+
+   _minPower =  (float(minMotorPower)/float(_totalPower))*100.0;
+   if (_minPower<100) ++_minPower;
+}
+
+
+void Pepito::setAuxillary(byte Led, byte Speaker) {
+ led = Led;
+ speaker = Speaker;
+}
+
+void Pepito::setTrackers(byte leftTracker, byte rightTracker) {
+ lTracker = leftTracker;
+ rTracker = rightTracker;
+}
+
+void Pepito::setMotors(byte leftMotorA, byte leftMotorB, byte rightMotorA, byte rightMotorB) {
+ lMotorA = leftMotorA;
+ lMotorB = leftMotorB;
+ rMotorA = rightMotorA;
+ rMotorB = rightMotorB;
+}
+
+void Pepito::setMotorRating(float min, float max) {
+ minMotorPower = min;
+ maxMotorPower = max;
 }
 
 void Pepito::ledOn() {
