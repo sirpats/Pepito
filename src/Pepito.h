@@ -28,7 +28,11 @@ class Pepito
   public:
 	Pepito(float power);	// total power in volts
 	~Pepito();
- 	void setPower(float power);
+	void setDefaults();
+	void setAuxillary(byte Led, byte Speaker);
+	void setTrackers(byte leftTracker, byte rightTracker);
+	void setMotors(byte leftMotorA, byte leftMotorB, byte rightMotorA, byte rightMotorB);
+	void setMotorRating(float min, float max);
 	void ledOn();
 	void ledOff();
 	void blink(int duration);
@@ -59,7 +63,7 @@ class Pepito
   private:
 	int _minPower;
 	int _maxPower;
-	int _totalPower;
+	float _totalPower;
 
 }; // don't forget this semi-colon
 
