@@ -29,16 +29,18 @@ Pepito::Pepito(float power)
 
   stop();
 
-  // initializa oled screen
+  
+  // initializa oled screen ==================================================
+  // the SCREEN object is initialized in 'Pepito.h'
   #if RST_PIN >= 0
   	screen.begin(&Adafruit128x64, I2C_ADDRESS, RST_PIN);
   #else // RST_PIN >= 0
-  	screen.begin(&Adafruit128x64, I2C_ADDRESS);
+	  	screen.begin(&Adafruit128x64, I2C_ADDRESS);
   #endif // RST_PIN >= 0
   // Call screen.setI2cClock(frequency) to change from the default frequency.
 
   screen.setFont(Adafruit5x7);
-
+  //============================================================================
 
  // display power setting
  screen.clear();
@@ -80,8 +82,21 @@ void Pepito::setDefaults() {
    _maxPower = 100;
   }
 
-   _minPower =  (float(minMotorPower)/float(_totalPower))*100.0;
-   if (_minPower<100) ++_minPower;
+  _minPower =  (float(minMotorPower)/float(_totalPower))*100.0;
+  if (_minPower<100) ++_minPower;
+
+  //button setup
+  button[0]=7;
+  button[1]=8;
+  button[2]=11;
+  button[3]=12;
+  button[4]=14;  
+
+  for (int i=1;i<=4;i++) {
+    pinMode(button[i], INPUT_PULLUP);
+  }
+  _debounceTime=millis();
+
 }
 
 
@@ -107,6 +122,21 @@ void Pepito::setMotorRating(float min, float max) {
  maxMotorPower = max;
 }
 
+void Pepito::setButtons(byte b1, byte b2, byte b3, byte b4, byte b5) {
+ int i;
+ button[0]=b1;
+ button[1]=b2;
+ button[2]=b3;
+ button[3]=b4;
+ button[4]=b5;
+ for (i=0;i<=4;i++) {
+     if (button[i]==0) {
+        break;
+     }
+     pinMode(button[i], INPUT_PULLUP);
+ } 
+}
+
 void Pepito::ledOn() {
   digitalWrite(led, HIGH);
 }
@@ -130,8 +160,9 @@ void Pepito::speakerOff() {
 }
 
 void Pepito::beep(int power, int duration) {
+     double t=millis()+duration;
      analogWrite(speaker, power);
-     delay(duration);
+     while (millis()<=t) { }; // do nothing
      speakerOff();
 }
 
@@ -151,7 +182,37 @@ int Pepito::minPower() {
     return _minPower;
 }
 
-float Pepito::distance(int trigPin, int echoPin) {
+int Pepito::buttonPress() {
+  byte pressedButton=0;
+  byte i=0;
+
+  if ((millis() < _debounceTime)) {
+    return 0;
+  }
+  
+  for (i=0;i<=4;i++) {
+    if (button[i]==0) { break; } // end of button set (0)
+    if (digitalRead(button[i])==0) { 
+      pressedButton=i+1;
+      break; 
+    } 
+  }
+
+  if (pressedButton==0) {
+      return 0; 
+  } 
+
+  /*if (digitalRead(button[i])==LOW) {
+     return 0;
+  } */ 
+  
+  _debounceTime = millis() + 500; //milliseconds
+  //_debounceTime = millis();
+  return pressedButton;
+}
+
+
+float Pepito::distanceX(int trigPin, int echoPin) {
    long duration;
    pinMode(trigPin, OUTPUT);
    pinMode(echoPin, INPUT);

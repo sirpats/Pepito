@@ -33,6 +33,7 @@ class Pepito
 	void setTrackers(byte leftTracker, byte rightTracker);
 	void setMotors(byte leftMotorA, byte leftMotorB, byte rightMotorA, byte rightMotorB);
 	void setMotorRating(float min, float max);
+	void setButtons(byte b1, byte b2, byte b3, byte b4, byte b5);
 	void ledOn();
 	void ledOff();
 	void blink(int duration);
@@ -43,7 +44,8 @@ class Pepito
 	int rightTracker();
 	int maxPower();
 	int minPower();
-	float distance(int trigPin, int echoPin);
+	int buttonPress();
+	float distanceX(int trigPin, int echoPin);
 	void setLeftMotor(int power);
 	void setRightMotor(int power);
 	void stop();
@@ -58,12 +60,14 @@ class Pepito
 	byte rMotorB;
 	byte maxMotorPower;
 	byte minMotorPower;
+	byte button[5];
 	SSD1306AsciiAvrI2c screen;
 
   private:
 	int _minPower;
 	int _maxPower;
 	float _totalPower;
+	double _debounceTime;
 
 }; // don't forget this semi-colon
 

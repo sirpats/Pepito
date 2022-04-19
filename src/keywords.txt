@@ -1,4 +1,4 @@
-# Syntax
+	# Syntax
 
 
 # Datatypes
@@ -16,6 +16,7 @@ speakerOff	KEYWORD2
 beep		KEYWORD2
 leftTracker	KEYWORD2
 rightTracker	KEYWORD2
+pressed		KEYWORD2
 maxPower	KEYWORD2
 minPower	KEYWORD2
 distance	KEYWORD2
@@ -24,6 +25,7 @@ setRightMotor	KEYWORD2
 stop		KEYWORD2
 move		KEYWORD2
 screen		KEYWORD2
+pressed		KEYWORD2
 
 # Constants
 
