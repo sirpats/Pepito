@@ -16,6 +16,8 @@ Pepito::Pepito(float power)
   lMotorB	= 9;
   rMotorA	= 6;
   rMotorB	= 10; 
+  trigPin	= 2;
+  echoPin	= 4;
 
   // default geared motor rating
   maxMotorPower = 6; // volts
@@ -227,6 +229,20 @@ float Pepito::distanceX(int trigPin, int echoPin) {
 }
 
 
+float Pepito::distance() {
+   long duration;
+   pinMode(trigPin, OUTPUT);
+   pinMode(echoPin, INPUT);
+
+   digitalWrite(trigPin, LOW);
+   delayMicroseconds(2);
+   digitalWrite(trigPin, HIGH);
+   delayMicroseconds(10);
+   digitalWrite(trigPin, LOW);
+   duration=pulseIn(echoPin, HIGH);
+   return (duration/2)/29.15; 
+}
+
 void Pepito::setLeftMotor(int power) {
      byte p=map(abs(power), 1, 100, _minPower, _maxPower);
      if (power==0) p=0;
@@ -284,3 +300,10 @@ void Pepito::move(byte direction, byte power, int duration) {
     if (duration>0) stop();
 }
 
+void Pepito::flipDisplay(byte act) {
+    if (act) {
+	screen.displayRemap(true);
+    } else {
+	screen.displayRemap(false);
+    }
+}
