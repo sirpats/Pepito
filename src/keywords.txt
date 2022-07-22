@@ -19,11 +19,13 @@ rightTracker	KEYWORD2
 pressed		KEYWORD2
 maxPower	KEYWORD2
 minPower	KEYWORD2
+distanceX	KEYWORD2
 distance	KEYWORD2
 setLeftMotor	KEYWORD2
 setRightMotor	KEYWORD2
 stop		KEYWORD2
 move		KEYWORD2
+flipDisplay	KEYWORD2
 screen		KEYWORD2
 pressed		KEYWORD2
 
