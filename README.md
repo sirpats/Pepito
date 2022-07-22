@@ -11,6 +11,8 @@ The connections/pin assignments and motor rating defaults may be overridden by c
     speaker             D3                        SPEAKER/BUZZER
     lTracker            16/A2                     LEFT LINE TRACKER
     rTracker            17/A3                     RIGHT LINE TRACKER
+    trigPin             2                         DISTANCE SENSOR TRIGGER PIN
+    echoPin             4                         DISTANCE SENSOR ECHO PIN
     lMotorA             D5                        LEFT MOTOR PIN A
     lMotorB             D9                        LEFT MOTOR PIN B
     rMotorA             D6                        RIGHT MOTOR PIN A
