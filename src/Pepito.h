@@ -46,10 +46,12 @@ class Pepito
 	int minPower();
 	int buttonPress();
 	float distanceX(int trigPin, int echoPin);
+	float distance();
 	void setLeftMotor(int power);
 	void setRightMotor(int power);
 	void stop();
 	void move(byte direction, byte power, int duration);
+	void flipDisplay(byte act);
 	byte led;
 	byte speaker;
 	byte lTracker;
@@ -58,6 +60,8 @@ class Pepito
 	byte lMotorB;
 	byte rMotorA;
 	byte rMotorB;
+	byte trigPin;
+	byte echoPin;
 	byte maxMotorPower;
 	byte minMotorPower;
 	byte button[5];
