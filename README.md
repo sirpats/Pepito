@@ -1,3 +1,6 @@
+DOCUMENTATION LINK: Links to the user manual and related resources are posted below:
+    - Video Tutorials (https://www.youtube.com/c/DennisPatino)
+
 Version 1 contains basic functions that easily allow the use of 
 
 the robot's LED, speaker, line trackers, distance sensor and motors.
